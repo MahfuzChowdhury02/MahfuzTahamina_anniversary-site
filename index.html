@@ -462,6 +462,57 @@ img{display:block}
 .bp-b{width:min(160px,36%);right:14%;top:56%}
 .bp figcaption{font-size:19px}
 
+
+/* ---------- flip-page diary ---------- */
+.diary-wrap{position:relative;z-index:2;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:70px 16px 36px}
+.diary{--ph:min(74vh,720px);--pw:calc(var(--ph) * .72);position:relative;width:calc(var(--pw) * 2);height:var(--ph);perspective:2600px;transition:transform .9s cubic-bezier(.645,.045,.355,1)}
+.diary.single{--pw:min(90vw,400px);--ph:calc(var(--pw) * 1.42);width:var(--pw)}
+.leaf{position:absolute;top:0;left:50%;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.645,.045,.355,1);cursor:pointer}
+.diary.single .leaf{left:0;width:100%}
+.leaf.flipped{transform:rotateY(-180deg)}
+.diary.single .leaf.flipped{opacity:0;pointer-events:none;transition:transform .95s cubic-bezier(.645,.045,.355,1),opacity .3s .6s}
+.diary.no-anim .leaf{transition:none!important}
+.leaf .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:2px 6px 6px 2px;box-shadow:0 26px 44px -26px rgba(60,0,12,.55)}
+.leaf .face.back{transform:rotateY(180deg);border-radius:6px 2px 2px 6px}
+.leaf .face::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(70,25,10,.24),rgba(70,25,10,0) 10%)}
+.leaf .face.back::after{background:linear-gradient(270deg,rgba(70,25,10,.24),rgba(70,25,10,0) 10%)}
+.leaf.turning .face::before{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;animation:turnshade .95s ease-in-out}
+@keyframes turnshade{0%,100%{background:transparent}50%{background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(255,255,255,.12))}}
+.diary-rings{position:absolute;left:50%;top:5%;bottom:5%;width:62px;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
+.diary.single .diary-rings{left:0}
+.diary-rings span{height:18px;border-radius:11px;border:4px solid #c9a24a;border-top-color:#f6e1a0;border-bottom-color:#8f6b1e;box-shadow:0 3px 4px rgba(0,0,0,.35),inset 0 1px 1px rgba(255,255,255,.7)}
+.pg{position:absolute;inset:0;display:flex;flex-direction:column;padding:calc(var(--ph) * .05) calc(var(--pw) * .09) calc(var(--ph) * .045) calc(var(--pw) * .12)}
+.face.back .pg{padding-left:calc(var(--pw) * .09);padding-right:calc(var(--pw) * .12)}
+.paper{background-color:#fdf7f3;background-image:url(assets/cream-paper.webp);background-size:cover;background-blend-mode:soft-light}
+.pg .eyebrow{font-size:11px}
+.pg-list{list-style:none;counter-reset:r var(--start);margin-top:calc(var(--ph) * .015);font-family:"Cormorant Garamond",serif;font-size:clamp(14px,calc(var(--ph) * .027),19px);color:#4a1f26}
+.pg-list li{counter-increment:r;padding:calc(var(--ph) * .009) 0;border-bottom:1px solid rgba(200,80,100,.2);line-height:1.3}
+.pg-list li::before{content:counter(r) ".";display:inline-block;min-width:2em;font-style:italic;color:#a3283a}
+.pg-photo{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-top:calc(var(--ph) * .03)}
+.pg-photo .frame{position:relative;height:calc(100% - 30px);aspect-ratio:.74;max-width:82%}
+.pg-photo .arch{width:100%;height:100%;aspect-ratio:auto;outline:5px solid #fdf7f3}
+.pg-photo .pin{top:-22px;width:46px}
+.pg-photo figcaption{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(16px,calc(var(--ph) * .027),20px);color:#7a0f1f}
+.pg-num{position:absolute;bottom:calc(var(--ph) * .018);left:0;right:0;text-align:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:13px;color:#b08a8f}
+.pg.center{align-items:center;justify-content:center;text-align:center;gap:12px}
+.pg .script{font-family:"Pinyon Script",cursive;font-size:calc(var(--ph) * .085);line-height:1;color:#9e1b2e}
+.pg .serif{font-family:"Cormorant Garamond",serif;font-weight:300;font-size:calc(var(--ph) * .042);line-height:1.2;color:#6e0d1b}
+.pg .muted{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:17px;color:#a8797e}
+.pg .heart-pin{width:48px;filter:drop-shadow(3px 6px 4px rgba(60,0,10,.3))}
+.pg.cover{background:linear-gradient(rgba(110,8,26,.22),rgba(55,0,12,.55)),url(assets/silk.webp) center/cover;color:#f6dfb0;padding:10%}
+.pg.cover::before{content:"";position:absolute;inset:14px;border:2px dashed rgba(255,226,226,.42);border-radius:6px;pointer-events:none}
+.pg.cover .eyebrow{color:#f3c9cf}
+.foil-text{background:linear-gradient(110deg,#a8761a 0%,#f8df8a 32%,#c99a35 52%,#fff0b8 68%,#b8862a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 6px rgba(30,0,6,.45))}
+.pg.cover .script{font-size:calc(var(--ph) * .13);color:transparent}
+.pg.cover .serif{color:#fde9ec;font-size:calc(var(--ph) * .05)}
+.pg.cover .muted{color:#f3c9cf}
+.diary-nav{display:flex;align-items:center;gap:18px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:#fff4f2}
+.dnav{width:46px;height:46px;border-radius:50%;background:rgba(253,245,242,.94);color:#9e1b2e;font-size:26px;line-height:1;display:grid;place-items:center;box-shadow:0 10px 20px -10px rgba(60,0,12,.6);transition:transform .15s,opacity .2s}
+.dnav:hover{transform:translateY(-2px)}
+.dnav:disabled{opacity:.35;cursor:default;transform:none}
+#dg-count{min-width:120px;text-align:center}
+.diary-hint{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:16px;color:rgba(255,244,242,.85)}
+
 /* ---------- mobile ---------- */
 @media (max-width:760px){
   .invite{grid-template-columns:1fr;padding:96px 22px 36px;gap:30px;min-height:0}
@@ -736,22 +787,16 @@ img{display:block}
   <button class="back-btn" data-go="s-g3">back</button>
   <img class="decor-flower tr" src="assets/flower-a.webp" alt="">
   <img class="decor-flower bl" src="assets/flower-b.webp" alt="">
-  <div class="book-wrap">
-    <div class="binder rise">
-      <div class="pages">
-        <div class="rings" id="rings"></div>
-        <div class="page left"><ol id="reasons"></ol></div>
-        <div class="page right">
-          <div class="always" id="book-head"></div>
-          <div class="small" id="book-note"></div>
-          <div class="book-photos">
-            <figure class="bp bp-main"><img class="pin" src="assets/heart-pin.webp" alt=""><div class="arch ph" data-src="photo10"></div><figcaption id="polaroid-cap"></figcaption></figure>
-            <figure class="bp bp-a"><div class="arch ph" data-src="photo14"></div><figcaption data-bookcap="0"></figcaption></figure>
-            <figure class="bp bp-b"><div class="arch ph" data-src="photo15"></div><figcaption data-bookcap="1"></figcaption></figure>
-          </div>
-        </div>
-      </div>
+  <div class="diary-wrap">
+    <div class="diary" id="diary">
+      <div class="diary-rings" id="rings"></div>
     </div>
+    <div class="diary-nav">
+      <button class="dnav" id="dg-prev" aria-label="Previous page">&#8249;</button>
+      <span id="dg-count"></span>
+      <button class="dnav" id="dg-next" aria-label="Next page">&#8250;</button>
+    </div>
+    <p class="diary-hint">tap a page to turn it &#9825;</p>
   </div>
 </section>
 
@@ -790,7 +835,8 @@ const CONFIG = {
     photo12: "images/photo12.jpg",  // after the letter: polaroid 2
     photo13: "images/photo13.jpg",  // after the letter: polaroid 3
     photo14: "images/photo14.jpg",  // book: small photo 1
-    photo15: "images/photo15.jpg"   // book: small photo 2
+    photo15: "images/photo15.jpg",  // diary: page 3 photo
+    photo16: "images/photo16.jpg"   // diary: page 4 photo
   },
   // which part of a photo to keep when it's cropped to fit: "top", "center" or "bottom"
   photoCrop: {
@@ -847,12 +893,20 @@ Never forget how deeply you are loved. You are my safe place, my sweetest dream,
     "You made two years feel like a beautiful beginning.",
     "You're simply you, and that's everything."
   ],
+  diary: {
+    coverEyebrow: "our little diary",
+    coverTitle: "Always,",
+    coverSub: "24 reasons",
+    introTitle: "Always,",
+    introLine: "24 months, 24 reasons<br>my heart has felt for you",
+    photos:   ["photo10", "photo14", "photo15", "photo16"],      // one photo per page of 6 reasons
+    captions: ["my favourite view", "us ♡", "forever", "always"],
+    closing: "and I&rsquo;ll keep counting,<br><em>every month, forever.</em>",
+    closingSign: "Sunflower",
+    backCover: "to be continued, forever &#9825;"
+  },
   coverTitle: "I don&rsquo;t know <em>why</em> I love you this much&hellip;",
   coverSub: "but my heart kept a quiet list: 24 little reasons, one for every month of our two years. Each one softer, truer, and only ours.",
-  bookHead: "Always,",
-  bookNote: "24 months, 24 reasons<br>my heart has felt for you",
-  polaroidCaption: "my favourite view",
-  bookCaptions: ["us ♡", "forever"],
 
   // background music: streamed from YouTube (needs internet)
   music: {
@@ -977,7 +1031,7 @@ function goldStars(){
 /* ---- render ---- */
 $$("[data-heart-frame]").forEach(el => el.innerHTML = heartFrame(el.dataset.heartFrame));
 $$("[data-bear]").forEach(el => el.innerHTML = bear(el.dataset.bear));
-$("#rings").innerHTML = "<span></span>".repeat(7);
+$("#rings").innerHTML = "<span></span>".repeat(6);
 $$(".ph[data-src]").forEach(el => {
   const img = new Image(); img.alt = ""; el.appendChild(img);
   img.style.objectPosition = "50% " + ({ top: "15%", bottom: "85%" }[(CONFIG.photoCrop || {})[el.dataset.src]] || "50%");
@@ -1008,13 +1062,8 @@ T("#d-month", CONFIG.day.month); T("#d-next2", CONFIG.day.next2);
 T("#day-caption", CONFIG.dayCaption);
 $$("[data-daycap]").forEach(f => f.textContent = CONFIG.dayCaptions[f.dataset.daycap] || "");
 T("#r-count", CONFIG.reasons.length);
-$("#reasons").innerHTML = CONFIG.reasons.map(r => `<li>${r}</li>`).join("");
-T("#book-head", CONFIG.bookHead);
-$("#book-note").innerHTML = CONFIG.bookNote;
 $("#cover-title").innerHTML = CONFIG.coverTitle;
 $("#cover-sub").innerHTML = CONFIG.coverSub;
-T("#polaroid-cap", CONFIG.polaroidCaption);
-$$("[data-bookcap]").forEach(f => f.textContent = CONFIG.bookCaptions[f.dataset.bookcap] || "");
 
 /* ---- navigation ---- */
 let current = "s-lock";
@@ -1026,7 +1075,7 @@ function go(id){
   next.classList.add("active");
   current = id;
   if (id === "s-letter") openLetter();
-  if (id === "s-book") revealReasons();
+  if (id === "s-book") resetDiary();
   if (id === "s-lock") resetCode();
   if (id === "s-g1") $("#env").classList.remove("crack", "open", "flap-down", "out");
   if (id === "s-gifts") $$(".gift").forEach(g => g.classList.remove("opening"));
@@ -1120,6 +1169,100 @@ function openLetter(){
 }
 $("#sheet3d").addEventListener("click", unfoldAll);
 addEventListener("resize", () => { if (current === "s-letter") fitLetter(); });
+
+/* ---- flip-page diary: 6 reasons + a photo on every page ---- */
+const D = CONFIG.diary, PER_PAGE = 6;
+const ROMAN = ["I", "II", "III", "IV", "V", "VI"];
+const PIN_IMG = '<img class="pin" src="assets/heart-pin.webp" alt="">';
+const DIARY_PAGES = [{ type: "cover" }, { type: "intro" }];
+for (let k = 0; k * PER_PAGE < CONFIG.reasons.length; k++) DIARY_PAGES.push({ type: "reasons", k });
+DIARY_PAGES.push({ type: "closing" }, { type: "back" });
+
+function diaryPage(pg, n){
+  if (pg.type === "cover") return `<div class="pg cover center"><p class="eyebrow">${D.coverEyebrow}</p>
+      <div class="script foil-text">${D.coverTitle}</div><div class="serif">${D.coverSub}</div><p class="muted">tap to open &#9825;</p></div>`;
+  if (pg.type === "intro") return `<div class="pg paper center"><div class="script">${D.introTitle}</div>
+      <p class="eyebrow">${D.introLine}</p><img class="heart-pin" src="assets/heart-pin.webp" alt=""><p class="muted">turn the page</p></div>`;
+  if (pg.type === "closing") return `<div class="pg paper center"><div class="serif">${D.closing}</div>
+      <img class="heart-pin" src="assets/heart-pin.webp" alt=""><div class="script">${D.closingSign}</div></div>`;
+  if (pg.type === "back") return `<div class="pg cover center"><p class="muted">${D.backCover}</p></div>`;
+  const start = pg.k * PER_PAGE, items = CONFIG.reasons.slice(start, start + PER_PAGE);
+  return `<div class="pg paper"><p class="eyebrow">page ${ROMAN[pg.k] || pg.k + 1}</p>
+      <ol class="pg-list" style="--start:${start}">${items.map(r => `<li>${r}</li>`).join("")}</ol>
+      <figure class="pg-photo"><div class="frame">${PIN_IMG}<div class="arch ph" data-src="${D.photos[pg.k] || ""}"></div></div>
+      <figcaption>${D.captions[pg.k] || ""}</figcaption></figure><span class="pg-num">${n}</span></div>`;
+}
+
+let leaves = [], diaryPos = 0, diarySingle = null;
+const diaryEl = $("#diary");
+function buildDiary(){
+  const single = matchMedia("(max-width:760px)").matches;
+  if (single === diarySingle) return;
+  const keepPage = diarySingle === null ? 0 : (diarySingle ? diaryPos : diaryPos * 2);
+  diarySingle = single;
+  diaryEl.classList.toggle("single", single);
+  diaryEl.querySelectorAll(".leaf").forEach(l => l.remove());
+  const faces = DIARY_PAGES.map((pg, i) => diaryPage(pg, i - 1));
+  const blank = '<div class="pg paper"></div>';
+  const pairs = [];
+  if (single) faces.forEach(f => pairs.push([f, blank]));
+  else for (let i = 0; i < faces.length; i += 2) pairs.push([faces[i], faces[i + 1] || blank]);
+  leaves = pairs.map(([front, back], i) => {
+    const el = document.createElement("div");
+    el.className = "leaf";
+    el.innerHTML = `<div class="face front">${front}</div><div class="face back">${back}</div>`;
+    el.addEventListener("click", e => { e.stopPropagation(); turnDiary(el.classList.contains("flipped") ? i : i + 1); });
+    diaryEl.appendChild(el);
+    return el;
+  });
+  diaryEl.querySelectorAll(".ph[data-src]").forEach(ph => {
+    const img = new Image(); img.alt = ""; ph.appendChild(img);
+    loadPhoto(ph.dataset.src, u => img.src = u);
+  });
+  diaryPos = Math.min(single ? keepPage : Math.ceil(keepPage / 2), leaves.length);
+  layoutDiary(true);
+}
+function layoutDiary(instant){
+  if (instant) diaryEl.classList.add("no-anim");
+  const L = leaves.length;
+  leaves.forEach((el, i) => { const f = i < diaryPos; el.classList.toggle("flipped", f); el.style.zIndex = f ? i + 1 : L - i; });
+  if (!diarySingle) diaryEl.style.transform = diaryPos === 0 ? "translateX(-25%)" : diaryPos === L ? "translateX(25%)" : "";
+  else diaryEl.style.transform = "";
+  $("#dg-prev").disabled = diaryPos === 0;
+  $("#dg-next").disabled = diaryPos === L;
+  $("#dg-count").textContent = diaryPos === 0 ? "closed" : diaryPos === L ? "the end \u2661" :
+    diarySingle ? `page ${diaryPos} of ${L - 1}` : `${diaryPos} of ${L - 1}`;
+  if (instant) requestAnimationFrame(() => requestAnimationFrame(() => diaryEl.classList.remove("no-anim")));
+}
+function turnDiary(to){
+  const L = leaves.length;
+  if (to < 0 || to > L || to === diaryPos) return;
+  const forward = to > diaryPos, moving = leaves[forward ? diaryPos : to];
+  diaryPos = to;
+  moving.style.zIndex = L + 10;
+  moving.classList.add("turning");
+  moving.classList.toggle("flipped", forward);
+  setTimeout(() => { moving.classList.remove("turning"); layoutDiary(false); }, 950);
+  if (!diarySingle) diaryEl.style.transform = to === 0 ? "translateX(-25%)" : to === L ? "translateX(25%)" : "";
+  $("#dg-prev").disabled = to === 0; $("#dg-next").disabled = to === L;
+}
+function resetDiary(){ diaryPos = 0; layoutDiary(true); }
+$("#dg-prev").addEventListener("click", () => turnDiary(diaryPos - 1));
+$("#dg-next").addEventListener("click", () => turnDiary(diaryPos + 1));
+document.addEventListener("keydown", e => {
+  if (current !== "s-book") return;
+  if (e.key === "ArrowRight") turnDiary(diaryPos + 1);
+  if (e.key === "ArrowLeft") turnDiary(diaryPos - 1);
+});
+let touchX = null;
+diaryEl.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+diaryEl.addEventListener("touchend", e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+  if (Math.abs(dx) > 40) turnDiary(diaryPos + (dx < 0 ? 1 : -1));
+});
+matchMedia("(max-width:760px)").addEventListener("change", buildDiary);
+buildDiary();
 
 /* ---- reasons reveal ---- */
 function revealReasons(){
