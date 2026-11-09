@@ -463,6 +463,10 @@ img{display:block}
 .bp figcaption{font-size:19px}
 
 
+/* back button stays pinned top-right while the page scrolls */
+.back-btn{position:fixed;z-index:95}
+.mem-actions{display:flex;justify-content:center;margin-top:48px}
+
 /* ---------- flip-page diary ---------- */
 .diary-wrap{position:relative;z-index:2;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:70px 16px 36px}
 .diary{--ph:min(74vh,720px);--pw:calc(var(--ph) * .72);position:relative;width:calc(var(--pw) * 2);height:var(--ph);perspective:2600px;transition:transform .9s cubic-bezier(.645,.045,.355,1)}
@@ -728,6 +732,7 @@ img{display:block}
           <figure class="mem"><div class="arch-pin"><img class="pin" src="assets/heart-pin.webp" alt=""><div class="arch ph" data-src="photo12"></div></div><figcaption data-cap="1"></figcaption></figure>
           <figure class="mem"><div class="arch ph" data-src="photo13"></div><figcaption data-cap="2"></figcaption></figure>
         </div>
+        <div class="mem-actions"><button class="btn-red" data-go="s-gifts">Back to the gifts &#9825;</button></div>
       </div>
     </div>
   </div>
