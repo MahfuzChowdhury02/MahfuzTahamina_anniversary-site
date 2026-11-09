@@ -589,7 +589,7 @@ img{display:block}
       <img class="flower low-left" src="assets/flower-b.webp" alt="">
       <div class="msg">
         <h1 class="inv-title">How dare you <em>click no!</em></h1>
-        <p class="inv-sub">wrong answer, my love &mdash; try that again</p>
+        <p class="inv-sub">wrong answer, my love, try that again</p>
         <button class="btn-red" data-go="s-ask">Try again</button>
       </div>
     </div>
@@ -616,7 +616,7 @@ img{display:block}
   </div>
 </section>
 
-<!-- ================= 6. GIFT 1 — CARD, PHOTOS, ENVELOPE ================= -->
+<!-- ================= 6. GIFT 1: CARD, PHOTOS, ENVELOPE ================= -->
 <section class="screen blush" id="s-g1">
   <button class="back-btn" data-go="s-gifts">back</button>
   <div class="stage">
@@ -682,7 +682,7 @@ img{display:block}
   </div>
 </section>
 
-<!-- ================= 7. GIFT 2 — OUR DAY ================= -->
+<!-- ================= 7. GIFT 2: OUR DAY ================= -->
 <section class="screen blush" id="s-g2">
   <button class="back-btn" data-go="s-gifts">back</button>
   <div class="stage">
@@ -711,7 +711,7 @@ img{display:block}
   </div>
 </section>
 
-<!-- ================= 8. GIFT 3 — 21 REASONS ================= -->
+<!-- ================= 8. GIFT 3: 21 REASONS ================= -->
 <section class="screen blush" id="s-g3">
   <button class="back-btn" data-go="s-gifts">back</button>
   <div class="stage">
@@ -768,29 +768,29 @@ img{display:block}
 
 <script>
 /* =====================================================================
-   EDIT EVERYTHING HERE — text, passcode, photos, music
+   EDIT EVERYTHING HERE: text, passcode, photos, music
    Put your pictures in the /images folder with these names
-   (jpg/png/webp all work — just change the file name below).
+   (jpg/png/webp all work: just change the file name below).
    ===================================================================== */
 const CONFIG = {
   passcode: "1111",
 
   photos: {
-    photo1:  "images/photo1.jpg",   // heart frame — passcode screen
-    photo2:  "images/photo2.jpg",   // locket — left heart
-    photo3:  "images/photo3.jpg",   // locket — right heart
+    photo1:  "images/photo1.jpg",   // heart frame: passcode screen
+    photo2:  "images/photo2.jpg",   // locket: left heart
+    photo3:  "images/photo3.jpg",   // locket: right heart
     photo4:  "images/photo4.jpg",   // photo-booth strip 1
     photo5:  "images/photo5.jpg",   // photo-booth strip 2
     photo6:  "images/photo6.jpg",   // photo-booth strip 3
-    photo7:  "images/photo7.jpg",   // our-day page — top polaroid
-    photo8:  "images/photo8.jpg",   // our-day page — bottom polaroid
-    photo9:  "images/photo9.jpg",   // 21 reasons — cover print
-    photo10: "images/photo10.jpg",  // book — big polaroid
-    photo11: "images/photo11.jpg",  // after the letter — polaroid 1
-    photo12: "images/photo12.jpg",  // after the letter — polaroid 2
-    photo13: "images/photo13.jpg",  // after the letter — polaroid 3
-    photo14: "images/photo14.jpg",  // book — small photo 1
-    photo15: "images/photo15.jpg"   // book — small photo 2
+    photo7:  "images/photo7.jpg",   // our-day page: top polaroid
+    photo8:  "images/photo8.jpg",   // our-day page: bottom polaroid
+    photo9:  "images/photo9.jpg",   // 21 reasons: cover print
+    photo10: "images/photo10.jpg",  // book: big polaroid
+    photo11: "images/photo11.jpg",  // after the letter: polaroid 1
+    photo12: "images/photo12.jpg",  // after the letter: polaroid 2
+    photo13: "images/photo13.jpg",  // after the letter: polaroid 3
+    photo14: "images/photo14.jpg",  // book: small photo 1
+    photo15: "images/photo15.jpg"   // book: small photo 2
   },
   // which part of a photo to keep when it's cropped to fit: "top", "center" or "bottom"
   photoCrop: {
@@ -802,7 +802,7 @@ const CONFIG = {
   askText: "I have a little surprise for you.<br><em>Wanna see it?</em>",
 
   cardTitle: "Happy Anniversary",
-  cardText: "Today is a little reminder of how lucky I am — to love you, and to be loved right back by you.",
+  cardText: "Today is a little reminder of how lucky I am to love you, and to be loved right back by you.",
   stripDate: "11 · 11",
 
   letter:
@@ -818,7 +818,7 @@ Never forget how deeply you are loved. You are my safe place, my sweetest dream,
 
   day: { month: "November", prev2: "9", prev: "10", day: "11", next: "12", next2: "13" },
   dayTitle: "The day it<br><em>became us</em>",
-  dayCaption: "11 · 11 — the day you became my favourite person.",
+  dayCaption: "11 · 11, the day you became my favourite person.",
   dayCaptions: ["day one", "still us"],
 
   reasons: [
@@ -845,18 +845,18 @@ Never forget how deeply you are loved. You are my safe place, my sweetest dream,
     "You turn my bad days into soft ones.",
     "You still look at me like it's the first time.",
     "You made two years feel like a beautiful beginning.",
-    "You're simply you — and that's everything."
+    "You're simply you, and that's everything."
   ],
   coverTitle: "I don&rsquo;t know <em>why</em> I love you this much&hellip;",
-  coverSub: "but my heart kept a quiet list &mdash; 24 little reasons, one for every month of our two years. Each one softer, truer, and only ours.",
+  coverSub: "but my heart kept a quiet list: 24 little reasons, one for every month of our two years. Each one softer, truer, and only ours.",
   bookHead: "Always,",
   bookNote: "24 months, 24 reasons<br>my heart has felt for you",
   polaroidCaption: "my favourite view",
   bookCaptions: ["us ♡", "forever"],
 
-  // background music — streamed from YouTube (needs internet)
+  // background music: streamed from YouTube (needs internet)
   music: {
-    file: "music/song.mp3",              // your own song file — plays first if it exists (works offline & on iPhone)
+    file: "music/song.mp3",              // your own song file: plays first if it exists (works offline & on iPhone)
     youtubeId: "6DUUI2QL-Dg",            // used when there's no song file            // the part after watch?v= in the link
     title: "Right Here Waiting · piano",
     startAt: 0,                           // seconds into the song to begin
@@ -1205,13 +1205,13 @@ function useYouTube(){
           else if (e.data === YT.PlayerState.PAUSED) setPlayingUI(false);
           else if (e.data === YT.PlayerState.ENDED){ player.seekTo(M.startAt); player.playVideo(); }
         },
-        onError: () => { ytReady = false; setPlayingUI(false); blocked(isFilePage ? "♪ open the site with open-site.bat to hear the music" : "♪ the song couldn't load — check the internet"); }
+        onError: () => { ytReady = false; setPlayingUI(false); blocked(isFilePage ? "♪ open the site with open-site.bat to hear the music" : "♪ the song couldn't load: check the internet"); }
       }
     });
   };
   const s = document.createElement("script");
   s.src = "https://www.youtube.com/iframe_api";
-  s.onerror = () => blocked("♪ no internet — the song can't load");
+  s.onerror = () => blocked("♪ no internet, the song can't load");
   document.head.appendChild(s);
 }
 
