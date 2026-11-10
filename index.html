@@ -517,6 +517,30 @@ img{display:block}
 #dg-count{min-width:120px;text-align:center}
 .diary-hint{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:16px;color:rgba(255,244,242,.85)}
 
+
+/* ---------- gift switcher (floating bar on every gift screen) ---------- */
+.gift-nav{position:fixed;left:50%;bottom:18px;z-index:86;display:flex;gap:6px;padding:6px;border-radius:999px;
+  background:rgba(253,245,242,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 20px 38px -16px rgba(60,0,12,.6),inset 0 0 0 1px rgba(255,255,255,.65);
+  transform:translate(-50%,150%);opacity:0;pointer-events:none;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.gift-nav.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.gift-nav button{display:flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;border-radius:999px;color:#7a0f1f;text-align:left;transition:background .25s,color .25s,transform .2s}
+.gift-nav button:hover{background:#fbe2e5}
+.gift-nav button:active{transform:scale(.96)}
+.gift-nav img{width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(90,20,0,.25));transition:transform .3s}
+.gift-nav button:hover img{transform:translateY(-2px) rotate(-4deg)}
+.gift-nav i{display:block;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:17px;line-height:1}
+.gift-nav small{display:block;margin-top:2px;font-family:"Jost",sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#a8797e;line-height:1.2}
+.gift-nav button.current{background:#9e1b2e;color:#fff5f3;box-shadow:0 8px 16px -8px rgba(90,0,20,.7)}
+.gift-nav button.current small{color:#f6c9cf}
+.gift-nav button.seen:not(.current) small::after{content:" \2661"}
+/* leave room at the bottom of gift screens so the bar never covers content */
+#s-g1 .stage,#s-g2 .stage,#s-g3 .stage{padding-bottom:120px}
+.letter-page{padding-bottom:130px}
+.diary-wrap{padding-bottom:110px}
+.diary{--ph:min(68vh,700px)}
+.mem-actions{gap:14px;flex-wrap:wrap}
+
 /* ---------- mobile ---------- */
 @media (max-width:760px){
   .invite{grid-template-columns:1fr;padding:96px 22px 36px;gap:30px;min-height:0}
@@ -539,6 +563,12 @@ img{display:block}
   .arch-pin.cover{max-width:250px}
   .cover-right{align-items:center;text-align:center}
   .decor-flower{width:110px}
+  .gift-nav{left:12px;right:84px;bottom:22px;justify-content:space-between;transform:translateY(150%)}
+  .gift-nav.show{transform:none}
+  .gift-nav button{flex:1;justify-content:center;gap:5px;padding:6px 4px}
+  .gift-nav img{width:24px;height:24px}
+  .gift-nav i{font-size:15px}
+  .gift-nav small{display:none}
   .letter-stage{width:94vw}
   .sheet3d{aspect-ratio:971/1500}
   .book-photos{min-height:440px}
@@ -732,7 +762,7 @@ img{display:block}
           <figure class="mem"><div class="arch-pin"><img class="pin" src="assets/heart-pin.webp" alt=""><div class="arch ph" data-src="photo12"></div></div><figcaption data-cap="1"></figcaption></figure>
           <figure class="mem"><div class="arch ph" data-src="photo13"></div><figcaption data-cap="2"></figcaption></figure>
         </div>
-        <div class="mem-actions"><button class="btn-red" data-go="s-gifts">Back to the gifts &#9825;</button></div>
+        <div class="mem-actions"><button class="btn-ghost" data-go="s-gifts">All gifts</button><button class="btn-red" data-go="s-g2">Next gift: our day &#9825;</button></div>
       </div>
     </div>
   </div>
@@ -805,6 +835,11 @@ img{display:block}
   </div>
 </section>
 
+<nav class="gift-nav" id="gift-nav" aria-label="Switch gift">
+  <button data-go="s-g1"><img src="assets/gift-box.webp" alt=""><span><i>No. I</i><small>the letter</small></span></button>
+  <button data-go="s-g2"><img src="assets/gift-box.webp" alt=""><span><i>No. II</i><small>our day</small></span></button>
+  <button data-go="s-g3"><img src="assets/gift-box.webp" alt=""><span><i>No. III</i><small>24 reasons</small></span></button>
+</nav>
 <div class="music" id="music">
   <div class="music-label"><span class="eq"><i></i><i></i><i></i></span><span id="music-title">♪ our song</span></div>
   <button class="music-btn" id="music-btn" aria-label="Play music">
@@ -1079,6 +1114,7 @@ function go(id){
   next.scrollTop = 0;
   next.classList.add("active");
   current = id;
+  updateGiftNav();
   if (id === "s-letter") openLetter();
   if (id === "s-book") resetDiary();
   if (id === "s-lock") resetCode();
@@ -1108,6 +1144,17 @@ $("#env").addEventListener("click", () => {
   setTimeout(() => env.classList.add("out"), 1300);
   setTimeout(() => { envBusy = false; go("s-letter"); }, 3100);
 });
+
+/* ---- gift switcher ---- */
+const GIFT_OF = { "s-g1": "s-g1", "s-letter": "s-g1", "s-g2": "s-g2", "s-g3": "s-g3", "s-book": "s-g3" };
+function updateGiftNav(){
+  const g = GIFT_OF[current];
+  $("#gift-nav").classList.toggle("show", !!g);
+  if (!g) return;
+  $$("#gift-nav [data-go]").forEach(b => b.classList.toggle("current", b.dataset.go === g));
+  $(`#gift-nav [data-go="${g}"]`).classList.add("seen");
+  $$(`.gift[data-gift="${g}"]`).forEach(x => x.classList.add("opened"));
+}
 
 /* ---- passcode ---- */
 let code = "";
